@@ -1,0 +1,33 @@
+{
+	"info": {
+		"_postman_id": "a9b6c302-69fe-4257-8cc7-1e599400d50c",
+		"name": "Coperex-V",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "37585469"
+	},
+	"item": [
+		{
+			"name": "Login Ad",
+			"item": [
+				{
+					"name": "Login Ad",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"balvarez-2023244@kinal.edu.gt\",\r\n    \"password\": \"Bry22an$\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3007/Coperex/v1/auth/login"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
