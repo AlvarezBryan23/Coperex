@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"balvarez-2023244@kinal.edu.gt\",\r\n    \"password\": \"Bry22an$\"\r\n}",
+							"raw": "{\r\n    \"username\": \"B.Alvarez\",\r\n    \"password\": \"Bry22an$\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,6 +24,52 @@
 							}
 						},
 						"url": "http://localhost:3007/Coperex/v1/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Empresas",
+			"item": [
+				{
+					"name": "Add Empresa",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2JlMmM2YWM2OGI1MTZiMWQ1ZTZjMmEiLCJpYXQiOjE3NDA1MTY0NjMsImV4cCI6MTc0MDUyMDA2M30.fIrj9flgGRjgTnwmhg8dsNtgUCV8_1I2MjMyZEupRsQ"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombreEmpresa\": \"La Estancia\",\r\n    \"tipoDeEmpresa\": \"Industrial\",\r\n    \"industria\": \"Comida Elegante\",\r\n    \"ubicacion\": \"portales\",\r\n    \"phone\": \"36457891\",\r\n    \"trayectoria\": \"10 años\",\r\n    \"descripcion\": \"Conceto de comida para gozar\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3007/Coperex/v1/empresa/addEmpresa"
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3007/Coperex/v1/empresa/"
 					},
 					"response": []
 				}

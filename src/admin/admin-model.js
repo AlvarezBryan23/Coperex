@@ -22,8 +22,7 @@ const adminSchema = Schema({
     },
     email:{
         type: String,
-        required: [true, "Email is required"],
-        unique: true
+        required: [true, "Email is required"]
     },
     phone:{
         type: String,

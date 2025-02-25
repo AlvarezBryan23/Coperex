@@ -21,11 +21,6 @@ const empresaSchema = Schema({
         required: true,
         unique: true
     },
-    email: {
-        type:String,
-        required: [true, "Email is required"],
-        unique: true
-    },
     phone: {
         type: String,
         required: true,
@@ -41,11 +36,6 @@ const empresaSchema = Schema({
         type:String,
         required: [true, "La descripcion es requerida"],
         maxLength: [200, "La descripcion no puede exceder los 200 caracteres"]
-    },
-    keep:{
-        type: Schema.Types.ObjectId,
-        ref: 'admin',
-        default: true
     },
     status:{
         type: Boolean,

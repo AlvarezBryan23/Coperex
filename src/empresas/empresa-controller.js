@@ -6,18 +6,12 @@ import Admin from "../admin/admin-model.js"
 export const saveEmpresa = async(req, res) =>{
     try{
         const data = req.body
-        const admin = await Admin.findOne({id: data._id});
+        
 
-        if(!admin){
-            return res.status(404).json({
-                success: false,
-                message: "Admin no encontrado"
-            });
-        }
 
         const empresa = new Empresas({
             ...data,
-            keep: admin._id
+           
         })
 
         await empresa.save();
@@ -38,7 +32,7 @@ export const saveEmpresa = async(req, res) =>{
 
 export const getEmpresas = async(req, res) =>{
     try{
-        const {limit = 0, from = 0} = req.query
+        const {limit = 1, from = 0} = req.query
         const query = {status: true}
 
         const [ total, empresas ] = await Promise.all([
