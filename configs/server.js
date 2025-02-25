@@ -6,6 +6,7 @@ import helmet from "helmet"
 import morgan from "morgan"
 import { dbConnection } from "./mongo.js"
 import authRoutes from "../src/auth/auth.routes.js"
+import empresaRoutes from "../src/empresas/empresa-routes.js"
 
 const middlewares = (app) =>{
     app.use(express.urlencoded({extended: true}))
@@ -17,6 +18,7 @@ const middlewares = (app) =>{
 
 const routes = (app) =>{
     app.use("/Coperex/v1/auth", authRoutes)
+    app.use("/Coperex/v1/empresa", empresaRoutes)
 }
 
 const conectarDB = async() =>{
