@@ -35,3 +35,29 @@ export const saveEmpresa = async(req, res) =>{
         })
     }
 }
+
+export const getEmpresas = async(req, res) =>{
+    try{
+        const {limit = 0, from = 0} = req.query
+        const query = {status: true}
+
+        const [ total, empresas ] = await Promise.all([
+            Empresas.countDocuments(query),
+            Empresas.find(query)
+                    .skip(Number(from))
+                    .skip(Number(limit))
+        ])
+
+        return res.status(200).json({
+            success: true,
+            total,
+            empresas
+        })
+    }catch(err){
+        return res.status(500).json({
+            success: false,
+            message: "Error al listar las empresas",
+            error: err.message
+        })
+    }
+}
