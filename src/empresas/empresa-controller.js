@@ -1,14 +1,13 @@
 "use strict"
 
 import Empresas from "../empresas/empresa-model.js"
-import Admin from "../admin/admin-model.js"
+import { generateExcel} from "../reportes/reportesExcel.js"
+import path from "path"
 
 export const saveEmpresa = async(req, res) =>{
     try{
         const data = req.body
         
-
-
         const empresa = new Empresas({
             ...data,
            
@@ -32,7 +31,7 @@ export const saveEmpresa = async(req, res) =>{
 
 export const getEmpresas = async(req, res) =>{
     try{
-        const {limit = 1, from = 0} = req.query
+        const {limit = 0, from = 0} = req.query
         const query = {status: true}
 
         const [ total, empresas ] = await Promise.all([
@@ -42,10 +41,13 @@ export const getEmpresas = async(req, res) =>{
                     .skip(Number(limit))
         ])
 
+        const filePath = await generateExcel(empresas);
+
         return res.status(200).json({
             success: true,
             total,
-            empresas
+            empresas,
+            filePath: `/reportesExcel/${path.basename(filePath)}`
         })
     }catch(err){
         return res.status(500).json({
