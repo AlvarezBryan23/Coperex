@@ -1,5 +1,4 @@
 import { body } from "express-validator"
-import { existeEmail } from "../helpers/db-validator.js"
 import { validarCampos } from "./validar-campos.js"
 
 export const loginValidator = [
