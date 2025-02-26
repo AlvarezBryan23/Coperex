@@ -5,6 +5,7 @@ import cors from "cors"
 import helmet from "helmet"
 import morgan from "morgan"
 import { dbConnection } from "./mongo.js"
+import { saveAdmin } from "../src/admin/admin-controller.js"
 import authRoutes from "../src/auth/auth.routes.js"
 import empresaRoutes from "../src/empresas/empresa-routes.js"
 
@@ -24,6 +25,7 @@ const routes = (app) =>{
 const conectarDB = async() =>{
     try{
         await dbConnection()
+        await saveAdmin()
     }catch(err){
         console.log(`Database connection failed: ${err}`)
     }

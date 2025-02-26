@@ -1,30 +1,7 @@
 import Admin from "../admin/admin-model.js";
-import { hash,verify } from "argon2";
+import { verify } from "argon2";
 import { generateJWT } from "../helpers/generate-jwt.js";
 
-
-export const register = async(req, res) =>{
-    try{
-        const data = req.body
-
-        const encryptedPassword = await hash(data.password)
-
-        data.password = encryptedPassword
-
-        const admin = await Admin.create(data)
-        return res.status(201).json({
-            message: "Admin has ben registered",
-            name: admin.name,
-            surname: admin.surname,
-            email: admin.email
-        })
-    }catch(err){
-        return res.status(500).json({
-            message: "Admin registration failed",
-            error: err.message
-        })
-    }
-}
 export const login = async (req, res) => {
     const { email, username, password } = req.body;
     try {
