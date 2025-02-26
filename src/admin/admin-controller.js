@@ -8,7 +8,7 @@ export const saveAdmin = async() =>{
         if(!exitsAdmin){
             const hashedPassword = await hash("Bry22an$");
 
-            const admin = new User({
+            const admin = new Admin({
                 name: "Bryan",
                 surname: "Alvarez",
                 username: "B.Alvarez",

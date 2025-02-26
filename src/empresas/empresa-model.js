@@ -37,6 +37,11 @@ const empresaSchema = Schema({
         required: [true, "La descripcion es requerida"],
         maxLength: [200, "La descripcion no puede exceder los 200 caracteres"]
     },
+    impacto:{
+        type:String,
+        required: [true, "El impacto es obligatorio"],
+        maxLength: [50, "El impacto no debe excedee lo 50 caracteres"]
+    },
     status:{
         type: Boolean,
         default: true
