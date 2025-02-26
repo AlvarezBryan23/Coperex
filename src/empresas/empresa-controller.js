@@ -57,3 +57,45 @@ export const getEmpresas = async(req, res) =>{
         })
     }
 }
+
+export const getEmpresasListar = async (req, res) => {
+    const { limite = 5, desde = 0, filtro = '', orden} = req.query;
+    const query = { status: true }
+
+    // Validar y establecer el valor de orden
+    const sortOrder = orden === '' ? -1 : 1;
+
+    switch (filtro) {
+        case 'trayectoria':
+            query.trayectoria = { $exists: true };
+            break;
+        case 'tipoDeEmpresa':
+            query.tipoDeEmpresa = { $exists: true };
+            break;
+        default:
+            break;
+    }
+
+    const sort = { nombreEmpresa: sortOrder };
+
+    try {
+        const empresas = await Empresas.find(query)
+            .skip(Number(desde))
+            .limit(Number(limite))
+            .sort(sort);
+
+        const total = await Empresas.countDocuments(query);
+
+        res.status(200).json({
+            success: true,
+            total,
+            empresas,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Error al obtener las empresas',
+            error: error.message
+        });
+    }
+};
