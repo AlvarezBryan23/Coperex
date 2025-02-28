@@ -26,14 +26,6 @@
 						"url": "http://localhost:3007/Coperex/v1/auth/login"
 					},
 					"response": []
-				},
-				{
-					"name": "New Request",
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
 				}
 			]
 		},
@@ -46,14 +38,14 @@
 						"auth": {
 							"type": "bearer",
 							"bearer": {
-								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2JlMmM2YWM2OGI1MTZiMWQ1ZTZjMmEiLCJpYXQiOjE3NDA1MTY0NjMsImV4cCI6MTc0MDUyMDA2M30.fIrj9flgGRjgTnwmhg8dsNtgUCV8_1I2MjMyZEupRsQ"
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2JmNzQ3ZTg0YjAzYTkyZWE1OGFiNzEiLCJpYXQiOjE3NDA2MDA1NzMsImV4cCI6MTc0MDYwNDE3M30.aOJOL0ZJZ3A_1D4a4Ut12fDQKFBXohu7I-KVYGSf4fo"
 							}
 						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombreEmpresa\": \"La Estancia\",\r\n    \"tipoDeEmpresa\": \"Industrial\",\r\n    \"industria\": \"Comida Elegante\",\r\n    \"ubicacion\": \"portales\",\r\n    \"phone\": \"36457891\",\r\n    \"trayectoria\": \"10 años\",\r\n    \"descripcion\": \"Conceto de comida para gozar\"\r\n}",
+							"raw": "{\r\n    \"nombreEmpresa\": \"La Patsy\",\r\n    \"tipoDeEmpresa\": \"Industrial\",\r\n    \"industria\": \"Venta de Pasteles y comida\",\r\n    \"ubicacion\": \"Zona 18\",\r\n    \"phone\": \"12456939\",\r\n    \"trayectoria\": \"26 años\",\r\n    \"descripcion\": \"Conceto de Pasteles\",\r\n    \"impacto\": \"5 Estrellas\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -65,11 +57,50 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "ListarExcel",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": "http://localhost:3007/Coperex/v1/empresa/"
+					},
+					"response": []
+				},
+				{
+					"name": "Listar en Orden",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"listarOrden\": \"tipoDeEmpresa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3007/Coperex/v1/empresa/list"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Empresa",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombreEmpresa\": \"La mejor Polleria\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3007/Coperex/v1/empresa/updateEmpresa/67bd6ecf164176e5f544ca45"
 					},
 					"response": []
 				}

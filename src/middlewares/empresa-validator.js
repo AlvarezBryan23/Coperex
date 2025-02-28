@@ -3,6 +3,7 @@ import { body, param } from "express-validator"
 import { validarCampos } from "./validar-campos.js"
 import { validateJWT } from "./valida-jwt.js"
 import {handleErrors} from "./handle-errors.js"
+import { empresaExist } from "../helpers/db-validator.js"
 
 export const agregarEmpresaValidator = [
     validateJWT,
@@ -12,4 +13,11 @@ export const agregarEmpresaValidator = [
     body("trayectoria").notEmpty().withMessage("La trayectoria es requerida"),
     validarCampos,
     handleErrors  
+]
+
+export const updateEmpresaValidator = [
+    param("id", "No es un ID válido").isMongoId(),
+    param("id").custom(empresaExist),
+    validarCampos,
+    handleErrors
 ]

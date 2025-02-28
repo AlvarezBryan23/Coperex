@@ -1,45 +1,52 @@
-"use strict"
+"use strict";
 
-import express from "express"
-import cors from "cors"
-import helmet from "helmet"
-import morgan from "morgan"
-import { dbConnection } from "./mongo.js"
-import { saveAdmin } from "../src/admin/admin-controller.js"
-import authRoutes from "../src/auth/auth.routes.js"
-import empresaRoutes from "../src/empresas/empresa-routes.js"
+import express from "express";
+import cors from "cors";
+import helmet from "helmet";
+import morgan from "morgan";
+import { dbConnection } from "./mongo.js";
+import { saveAdmin } from "../src/admin/admin-controller.js";
+import authRoutes from "../src/auth/auth.routes.js";
+import empresaRoutes from "../src/empresas/empresa-routes.js";
+import { swaggerDocs, swaggerUi } from "./swagger.js";
 
-const middlewares = (app) =>{
-    app.use(express.urlencoded({extended: true}))
-    app.use(express.json())
-    app.use(cors())
-    app.use(helmet())
-    app.use(morgan("dev"))
-}
+const middlewares = (app) => {
+    app.use(express.urlencoded({ extended: true }));
+    app.use(express.json());
+    app.use(cors({
+        origin: '*', // Permitir todas las solicitudes de origen
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization']
+    }));
+    app.use(helmet()); // Simplificar la configuración de Helmet
+    app.use(morgan("dev"));
+};
 
-const routes = (app) =>{
-    app.use("/Coperex/v1/auth", authRoutes)
-    app.use("/Coperex/v1/empresa", empresaRoutes)
-}
+const routes = (app) => {
+    app.use("/Coperex/v1/auth", authRoutes);
+    app.use("/Coperex/v1/empresa", empresaRoutes);
+    app.use("/Coperex/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+};
 
-const conectarDB = async() =>{
-    try{
-        await dbConnection()
-        await saveAdmin()
-    }catch(err){
-        console.log(`Database connection failed: ${err}`)
+const conectarDB = async () => {
+    try {
+        await dbConnection();
+        await saveAdmin();
+    } catch (err) {
+        console.log(`Database connection failed: ${err}`);
     }
-}
+};
 
-export const initServer = () =>{
-    const app = express()
-    try{
-        middlewares(app)
-        conectarDB()
-        routes(app)
-        app.listen(process.env.PORT)
-        console.log(`Server running on port: ${process.env.PORT}`)
-    }catch(err){
-        console.log(`Server init failed: ${err}`)
+export const initServer = () => {
+    const app = express();
+    try {
+        middlewares(app);
+        conectarDB();
+        routes(app);
+        app.listen(process.env.PORT, () => {
+            console.log(`Server running on port: ${process.env.PORT}`);
+        });
+    } catch (err) {
+        console.log(`Server init failed: ${err}`);
     }
-}
+};
